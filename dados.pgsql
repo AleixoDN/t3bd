@@ -69,13 +69,12 @@ VALUES
 -- * ESTRELA *
 INSERT INTO ESTRELA (NOME, RAIO_MEDIO, MASSA, CATEGORIA, COORDENADA_X, COORDENADA_Y)
 VALUES
-    ('PittySun', NULL, NULL, 'F', 782.5, 125.25),
-    ('Wrecking', NULL, NULL, 'G', 978.15, 789.23),
-    ('Messi 10', NULL, NULL, 'M', 142.45, 700.0),
-    ('Possani', NULL, NULL, 'B', 748.8, -284.4),
-    ('Stylus', NULL, NULL, 'K', -124.8, -542.4),
-    ('Fashiuns', NULL, NULL, 'K', -124.8, -542.4);
-
+    ('PittySun', 695700.0, 1.989e30, 'F', 782.5, 125.25),
+    ('Wrecking', 834000.0, 1.989e30, 'G', 978.15, 789.23),
+    ('Messi 10', 432700.0, 3.302e30, 'M', 142.45, 700.0),
+    ('Possani', 255400.0, 1.899e30, 'B', 748.8, -284.4),
+    ('Stylus', 514500.0, 3.694e30, 'K', -124.8, -542.4),
+    ('Fashiuns', 514500.0, 3.694e30, 'K', -124.8, -542.4);
 
 -- * CORPO PLANETARIO *
 INSERT INTO CORPOPLANETARIO (NOME, TIPO)
@@ -128,24 +127,52 @@ VALUES
 -- * PLANETA *
 INSERT INTO PLANETA (NOME, RAIO_MEDIO, MASSA, ESTRELA, DISTANCIA_ESTRELA, CATEGORIA, PERIODO_ORBITAL, ROTACAO, RESPIRAVEL)
 VALUES
-    ('Me Adora', NULL, NULL, 'PittySun', 19600000, 'Anão', 204, 15, FALSE),
-    ('PITTYNANDO', NULL, NULL, 'PittySun', 90750000, 'Rochoso', 269, 18, FALSE),
-    ('Teto de Vidro', NULL, NULL, 'PittySun', 158704000, 'Floresta', 315, 22, TRUE),
-    ('Rock', NULL, NULL, 'PittySun', 208807800, 'Com Vida', 390, 27, TRUE),
-    ('Equalize', NULL, NULL, 'PittySun', 297985002, 'Gasoso', 441, 32, FALSE),
-    ('Miley',  NULL, NULL, 'Wrecking', 57789000, 'Anão', 204, 15, TRUE), 
-    ('Cyrus', NULL, NULL, 'Wrecking', 100320000, 'Anão', 204, 15, FALSE), 
-    ('PartyUSA', NULL, NULL, 'Wrecking', 1394100000, 'Anão', 204, 15, FALSE), 
-    ('The Climb', NULL, NULL, 'Wrecking', 198347150, 'Anão', 204, 15, TRUE), 
-    ('Jolene', NULL, NULL, 'Wrecking', 237321900, 'Anão', 204, 15, FALSE), 
-    ('Flowers', NULL, NULL, 'Wrecking', 299623478, 'Anão', 204, 15, FALSE), 
-    ('Barcelona', NULL, NULL, 'Messi 10', 398707900, 'Anão', 204, 15, TRUE), 
-    ('Miami', NULL, NULL, 'Messi 10', 10600000, 'Anão', 204, 15, FALSE), 
-    ('Paris', NULL, NULL, 'Messi 10', 10600000, 'Anão', 204, 15, FALSE), 
-    ('Calculo', NULL, NULL, 'Possani', 10600000, 'Anão', 204, 15, FALSE), 
-    ('USP', NULL, NULL, 'Possani', 10600000, 'Anão', 204, 15, TRUE), 
-    ('Tenius', NULL, NULL, 'Stylus', 10600000, 'Anão', 204, 15, FALSE), 
-    ('Bolsus', NULL, NULL, 'Stylus', 10600000, 'Anão', 204, 15, FALSE), 
-    ('Camisus', NULL, NULL, 'Fashiuns', 10600000, 'Anão', 204, 15, FALSE), 
-    ('Minissaius', NULL, NULL, 'Fashiuns', 10600000, 'Anão', 204, 15, FALSE), 
-    ('Chinelus', NULL, NULL, 'Fashiuns', 10600000, 'Anão', 204, 15, TRUE);
+    ('Me Adora', 6200, 4.5e24, 'PittySun', 19800000, 'Planeta Desértico', 195, 14, FALSE),
+    ('PITTYNANDO', 5200, 0.5e24, 'PittySun', 93000000, 'Planeta Silicato', 255, 17, FALSE),
+    ('Teto de Vidro', 13500, 6.2e24, 'PittySun', 162000000, 'Planeta Oceânico', 305, 20, TRUE),
+    ('Rock', 7000, 5.2e24, 'PittySun', 205000000, 'Planeta Terrestre', 375, 26, TRUE),
+    ('Equalize', 70000, 2.0e25, 'PittySun', 290000000, 'Gigante Gasoso', 425, 30, FALSE),
+    ('Miley', 950, 1.0e21, 'Wrecking', 58000000, 'Planeta Anão', 195, 14, TRUE),
+    ('Cyrus', 1200, 1.5e22, 'Wrecking', 100000000, 'Planeta Silicato', 215, 16, FALSE),
+    ('PartyUSA', 350, 5.0e18, 'Wrecking', 1395000000, 'Gigante Gasoso', 185, 12, FALSE),
+    ('The Climb', 1900, 2.0e23, 'Wrecking', 196000000, 'Planeta Terrestre', 195, 14, TRUE),
+    ('Jolene', 850, 5.0e19, 'Wrecking', 243000000, 'Planeta Anão', 202, 13, FALSE),
+    ('Flowers', 1250, 2.0e21, 'Wrecking', 305000000, 'Planeta Ferro', 215, 15, FALSE),
+    ('Barcelona', 3300, 1.0e24, 'Messi 10', 405000000, 'Gigante Gasoso', 225, 14, TRUE),
+    ('Miami', 520, 8.0e18, 'Messi 10', 10800000, 'Planeta de Lava', 196, 14, FALSE),
+    ('Paris', 480, 1.0e19, 'Messi 10', 11000000, 'Planeta Anão', 202, 15, FALSE),
+    ('Calculo', 120000, 2.0e28, 'Possani', 10450000, 'Mega Gigante Gasoso', 380, 14, FALSE),
+    ('USP', 540, 1.1e19, 'Possani', 11100000, 'Planeta Terrestre', 236, 16, TRUE),
+    ('Tenius', 500, 8.0e18, 'Stylus', 10750000, 'Planeta Silicato', 184, 15, FALSE),
+    ('Bolsus', 490, 7.0e18, 'Stylus', 10600000, 'Planeta Anão', 150, 14, FALSE),
+    ('Camisus', 460, 9.0e18, 'Fashiuns', 10800000, 'Planeta Silicato', 198, 16, FALSE),
+    ('Minissaius', 450, 1.0e19, 'Fashiuns', 10750000, 'Planeta de Lava', 314, 15, FALSE),
+    ('Chinelus', 520, 1.2e19, 'Fashiuns', 10650000, 'Planeta Anão', 240, 14, TRUE);
+
+-- * SATELITE *
+INSERT INTO SATELITE (NOME, RAIO_MEDIO, MASSA, PLANETA, DISTANCIA_ESTRELA, CATEGORIA, PERIODO_ORBITAL, ROTACAO, RESPIRAVEL)
+VALUES
+    ('Sandy', 300, 2.5e20, 'Me Adora', 120000, 'Lua Rochosa', 30, 10, FALSE),
+    ('Chorao', 250, 1.5e20, 'PITTYNANDO', 90000, 'Lua Desértica', 22, 8, FALSE),
+    ('Guitarra', 400, 3e20, 'Teto de Vidro', 150000, 'Lua Gasosa', 40, 15, FALSE),
+    ('Finale', 275, 1e20, 'Equalize', 78000, 'Lua Rochosa', 28, 12, FALSE),
+    ('Disney Channel', 350, 1.8e20, 'Miley', 105000, 'Lua Gelada', 35, 14, TRUE),
+    ('Suarez', 200, 8e18, 'Barcelona', 65000, 'Lua Silicato', 25, 9, FALSE),
+    ('Ronaldo', 275, 1.5e19, 'Paris', 80000, 'Lua Rochosa', 32, 11, TRUE),
+    ('One', 1250, 6e23, 'Calculo', 60000, 'Lua Desértica', 20, 7, TRUE),
+    ('Two', 200, 9e18, 'Calculo', 73000, 'Lua Gasosa', 26, 10, FALSE),
+    ('Three', 250, 1.2e19, 'Calculo', 92000, 'Lua Rochosa', 32, 12, FALSE),
+    ('Four', 300, 1.5e19, 'Calculo', 115000, 'Lua Gelada', 38, 15, FALSE),
+    ('IME', 100, 4e18, 'USP', 40000, 'Lua Silicato', 18, 6, FALSE);
+
+-- * ASTEROIDE  *
+INSERT INTO ASTEROIDE (NOME, RAIO_MEDIO, MASSA, ESTRELA, DISTANCIA_ESTRELA, PERIODO_ORBITAL, ROTACAO, RESPIRAVEL)
+VALUES
+    ('Chip Novo', 150, 3.0e16, 'PittySun', 300000000, NULL, NULL, FALSE),
+    ('Desconfigurado', 120, 1.5e16, 'PittySun', 250000000, NULL, NULL, FALSE),
+    ('Wig', 90, 8.0e15, 'Wrecking', 150000000, NULL, NULL, FALSE),
+    ('Blonde Wig', 110, 1.2e16, 'Wrecking', 200000000, NULL, NULL, FALSE),
+    ('Bola de Ouro', 70, 4.0e15, 'Messi 10', 180000000, NULL, NULL, FALSE),
+    ('Shortus', 40, 5.0e14, 'Stylus', 90000000, NULL, NULL, FALSE);
+
+
