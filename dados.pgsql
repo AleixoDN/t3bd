@@ -176,3 +176,97 @@ VALUES
     ('Shortus', 40, 5.0e14, 'Stylus', 90000000, NULL, NULL, FALSE);
 
 
+-- ////////////////////////////////////////////////////////////////////////////////
+
+
+-- * GOVERNO *
+INSERT INTO GOVERNO (NOME, TIPO_GOVERNO)
+VALUES
+    ('Império de Neo Pompeia', 'Império Oligárquico'),
+    ('República Federativa StarBet', 'República Privada'),
+    ('Unidade de Ursa Menor', 'Democrácia'),
+    ('Fundação X', 'Império Tecnocrata');
+    
+-- * CORPORACAO *
+INSERT INTO CORPORACAO (CODIGO_CORPORATIVO, NOME)
+VALUES 
+    ('BET12345', 'Empresa Bet Aposte Aqui'),
+    ('MAJ67810', 'Moster AnyJobs LTD'),
+    ('TSC11129', 'Taylor Swift Corporation'),
+    ('CIA13145', 'Companhia de Extração'),
+    ('UBE20201', 'Uber and Sons Express');
+
+
+-- * NAVES *
+INSERT INTO NAVE (NOME_EMBARCACAO, NOME_BATISMO, MODELO, ANO, CORPORACAO)
+VALUES
+    ('FX-8705-VNS', 'Galáxia Corredor', 'Turbo Cruiser 2000', 2405, 'MAJ67810'),
+    ('FUNX-9876-GEM', 'Diamantes Minerador', 'Gem Explorer 6000', 2480, 'CIA13145'),
+    ('FX-8765-ERT', 'Mineiro Mestre', 'Resource Collector 7000', 2475, 'CIA13145'),
+    ('STRB-9876-VNS', 'Turbo Estrela', 'Turbo Cruiser 2000', 2398, 'MAJ67810'),
+    ('FUNX-9876-ERT', 'Platina Cavaleiro', 'Platinum Explorer 5500', 2485, 'CIA13145'),
+    ('UUM-7654-PLT', 'Pedreira Rei', 'Earth Mover 8000', 2498, 'CIA13145'),
+    ('BEAR-6543-VNS', '5000 Via Láctea', 'Galactic Explorer 5000', 2422, 'MAJ67810'),
+    ('NEOP-5678-PLT', 'Majestoso O', 'Galactic Explorer 5000', 2415, 'MAJ67810'),
+    ('FX-8766-GEM', 'Foxy Proxy', 'Silver Collector 3500', 2467, 'CIA13145'),
+    ('FUNX-2341-GEM', 'Diamantes Mergulhador', 'Gem Explorer 6000', 2490, 'CIA13145'),
+    ('NEOP-4567-PLT', 'Brocador', 'Rock Driller 3000', 2445, 'CIA13145'),
+    ('FUNX-3456-GEM', 'Golden Flame', 'Treasure Hunter 4500', 2455, 'CIA13145'),
+    ('RFSB-5678-PLT', 'Carlinhos', 'Furious Z 150', 2420, 'BET12345'),
+    ('STRB-1765-VNS', 'Midnights', 'Sonic Cruiser 3000', 2522, 'TSC11129'),
+    ('BEAR-0265-RKT', 'Shake it off', 'Swift Rocket 3000', 2548, 'TSC11129'),
+    ('UUM-9823-PLT', 'Pedreira Rainha', 'Earth Mover 8000', 2483, 'CIA13145'),
+    ('STRB-9876-VYR', 'Red', 'Starlight Voyager 2500', 2510, 'TSC11129'),
+    ('BEAR-2341-MON', 'Folklore', 'Monza Shuttle ZX', 2532, 'TSC11129'),
+    ('FUNX-8765-GEM', 'Gemas Caçador', 'Treasure Hunter 4500', 2440, 'CIA13145'),
+    ('FX-2341-PLT', 'Mineiro Marauder', 'Resource Collector 7000', 2465, 'CIA13145'),
+    ('BEAR-8765-PLT', 'Sortudo', 'Chance Cruiser 2800', 2419, 'BET12345'),
+    ('UUM-0001-VYR', 'Race Winner', 'Victory Seeker 2100', 2435, 'BET12345'),
+    ('UNIB-9798-VYR', 'Fezinha', 'Furious Z 280', 2378, 'BET12345'),
+    ('FX-8710-PLT', 'Rocha Cavaleiro', 'Earth Mover 8000', 2479, 'CIA13145'),
+    ('BEAR-9379-VYR', 'Evermore', 'Monza Shuttle ZX', 2555, 'TSC11129'),
+    ('STRB-8701-VNS', 'Taylor Version', 'Space Cruiser 1989', 2489, 'TSC11129'),
+    ('FUX-8767-RT', 'Excelente Expresso', 'Efficient Transporter 1800', 2408, 'UBE20201'),
+    ('RFSB-2801-VYR', 'Rápido Transporte', 'Speedy Voyager 2200', 2375, 'UBE20201'),
+    ('FUNX-1015-GEM', 'Profissional Mineração 1', 'Mining Pro 1 3000', 2455, 'BET12345'),
+    ('NEOP-0005-VLZ', 'Rápido Novinho', 'Volkswagen Express 2000', 2249, 'UBE20201'),
+    ('NEOP-2041-VYR', 'Extra Entrega', 'Delivery Master 1800', 2389, 'BET12345'),
+    ('UUM-1041-PLT', 'Titânio Cavalo', 'Titanium Tracker 6500', 2492, 'CIA13145'),
+    ('STRB-5670-VYR', 'Flash', 'Vroom Vroom Express 1500', 2255, 'UBE20201'),
+    ('FX-9871-ERT', 'Ferro Prospector', 'Heavy Extractor 2000', 2458, 'CIA13145'),
+    ('FUNX-2600-GEM', 'Diamantes do Espaço', 'Gem Explorer 6000', 2490, 'CIA13145'),
+    ('UUM-1234-ERT', 'Negro Falcão', 'Shadow Runner 1000', 2450, 'MAJ67810'),
+    ('INP-9376-VNS', 'Lover', 'Galactic Monarch 7000', 2555, 'TSC11129'),
+    ('UBE-0071-VYR', 'Sonhos Caçador', 'Dream Chaser 2200', 2523, 'UBE20201'),
+    ('UUM-8700-VYR', 'Aposta de Domingo', 'Furious Z 280', 2565, 'UBE20201'),
+    ('UUM-8708-VYR', 'Sorte Estrela', 'Furious Z 280', 2555, 'BET12345'),
+    ('RFSB-5677-PLT', 'Vitória Busca', 'Furious Z 280', 2540, 'BET12345'),
+    ('STRB-2765-PLT', 'Vermelho Foguete', 'Red Thunderbolt 4000', '2540', 'TSC11129'),
+    ('STRB-2942-VYR', 'Royale Jackpot', 'Fortune Royale 2800', 2475, 'BET12345'),
+    ('RFSB-5638-PLT', 'Expressa Aposta', 'Furious Z 150', 2420, 'BET12345'),
+    ('FX-0002-FST', 'Now Speak', 'Firestorm Explorer 4000', 2530, 'TSC11129'),
+    ('UUM-0001-PLT', 'O Agiota', 'Victory Seeker 2100', 2557, 'BET12345'),
+    ('FUNX-3006-GEM', 'Ouro Buscador', 'Treasure Hunter 4500', 2455, 'CIA13145'),
+    ('NEOP-2441-VYR', 'Real Aposta', 'Furious Z 150', 2462, 'BET12345'),
+    ('UUM-1302-PLT', 'Aposta Mágico', 'Furious Z 280', 2508, 'BET12345'),
+    ('NEOP-5671-PLT', 'Majestoso 1', 'Galactic Explorer 5000', 2415, 'MAJ67810'),
+    ('STRB-9040-VNS', 'Speed', 'Turbo Cruiser 2000', 2398, 'MAJ67810'),
+    ('UBE-2311-VYR', 'Aposta Estrela', 'Furious Z 280', 2378, 'BET12345'),
+    ('NEOP-9631-PLT', 'Petrolífera Plataforma', 'Fuel Extractor 4000', 2432, 'CIA13145'),
+    ('FX-0705-GEM', 'Prateada Raposa', 'Silver Collector 3500', 2467, 'CIA13145'),
+    ('FX-2333-MAR', 'Bibi GROOVE II', 'Interstellar X3000', 2402, 'MAJ67810'),
+    ('FUNX-7776-ERT', '1989', 'Furious Z 280', 2545, 'TSC11129'),
+    ('STRB-8765-VNS', 'Fearless', 'Sonic Cruiser 3000', 2522, 'TSC11129'),
+    ('BEAR-0565-PLT', 'Forte Sorte', 'Chance Cruiser 2800', '2419', 'BET12345'),
+    ('STRB-9776-VNS', 'Fusquinha', 'Turbo Cruiser 2000', 2398, 'MAJ67810'),
+    ('RFSB-9018-PLT', 'Mestre da Chance', 'Furious Z 280', '2482', 'BET12345'),
+    ('FUNX-0025-PLT', 'Futuro Transportador', 'Future Carrier 2800', 2412, 'UBE20201'),
+    ('NEOP-2001-PLT', 'Broca Mestre', 'Rock Driller 3000', 2445, 'CIA13145'),
+    ('NEOP-8095-VLZ', 'O Rápido', 'Volkswagen Express 2000', '2249', 'UBE20201'),
+    ('UUM-8165-VYR', 'Conquistador da Sorte', 'Luck Conqueror 2000', 2455, 'CIA13145'),
+    ('FUNX-8764-GEM', 'Mineração Profissional 1', 'Mining Pro 1 3000', '2455', 'BET12345'),
+    ('BEAR-3341-VYR', 'Dado Dourado', 'Golden Dice 1500', 2492, 'BET12345'),
+    ('INP-0303-VNS', 'Will Veloz Smith', 'Monza Shuttle ZX', '2395', 'UBE20201'),
+    ('FUNX-9875-ERT', 'Cavaleiro de Platina', 'Platinum Explorer 5500', '2485', 'CIA13145'),
+    ('STRB-2342-VYR', 'Apostador X', 'Fortune Explorer 2300', 2538, 'BET12345'),
+    ('UUM-2941-PLT', 'Um Vencedor', 'Victory Seeker 2100', 2557, 'BET12345');
