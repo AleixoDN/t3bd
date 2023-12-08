@@ -1,8 +1,66 @@
-SELECT * FROM GOVERNO;
+-- Para cada corporação, qual tipo de missão ela mais realizou?
 
-/*
-SELECT *
-FROM estrela
-JOIN sistema ON estrela.coordenada_x = sistema.coordenada_x AND estrela.coordenada_y = sistema.coordenada_y
-WHERE sistema.nome = 'Balanciagus';
-*/
+
+SELECT DISTINCT missao.titulo_missao, missao.data_inicio FROM missao;
+
+SELECT
+    corporacao AS Corporacao,
+    COUNT(CASE WHEN tipo_construcao_estacao IS NOT NULL THEN 1 END) AS Qtd_Construcao_Estacao,
+    COUNT(CASE WHEN tipo_exploracao_reconhecimento IS NOT NULL THEN 1 END) AS Qtd_Exploracao_Reconhecimento,
+    COUNT(CASE WHEN tipo_pesquisa_cientifica IS NOT NULL THEN 1 END) AS Qtd_Pesquisa_Cientifica,
+    COUNT(CASE WHEN tipo_extracao_recurso IS NOT NULL THEN 1 END) AS Qtd_Extracao_Recurso
+FROM (
+    SELECT
+        missao.titulo_missao,
+        missao.data_inicio,
+        MAX(construcao_estacao.tipo_missao) AS tipo_construcao_estacao,
+        MAX(exploracao_reconhecimento.tipo_missao) AS tipo_exploracao_reconhecimento,
+        MAX(pesq_cientifica.tipo_missao) AS tipo_pesquisa_cientifica,
+        MAX(extracao_recurso.tipo_missao) AS tipo_extracao_recurso,
+        MAX(contrato.titulo_contrato) AS contrato_titulo,
+        MAX(contrato.data_inicio) AS contrato_data_inicio,
+        MAX(contrato.governo) AS contrato_governo,
+        MAX(corporacao.nome) AS corporacao
+    FROM missao
+    LEFT JOIN construcao_estacao ON
+        construcao_estacao.titulo_missao = missao.titulo_missao
+        AND construcao_estacao.data_inicio = missao.data_inicio
+        AND construcao_estacao.tipo_missao = missao.tipo_missao
+    LEFT JOIN exploracao_reconhecimento ON
+        exploracao_reconhecimento.titulo_missao = missao.titulo_missao
+        AND exploracao_reconhecimento.data_inicio = missao.data_inicio
+        AND exploracao_reconhecimento.tipo_missao = missao.tipo_missao
+    LEFT JOIN pesq_cientifica ON
+        pesq_cientifica.titulo_missao = missao.titulo_missao
+        AND pesq_cientifica.data_inicio = missao.data_inicio
+        AND pesq_cientifica.tipo_missao = missao.tipo_missao
+    LEFT JOIN extracao_recurso ON
+        extracao_recurso.titulo_missao = missao.titulo_missao
+        AND extracao_recurso.data_inicio = missao.data_inicio
+        AND extracao_recurso.tipo_missao = missao.tipo_missao
+    JOIN contrato ON
+        (
+            (
+                contrato.titulo_contrato = construcao_estacao.titulo_contrato
+                AND contrato.data_inicio = construcao_estacao.data_inicio_contrato
+                AND contrato.governo = construcao_estacao.governo
+            ) OR (
+                contrato.titulo_contrato = exploracao_reconhecimento.titulo_contrato
+                AND contrato.data_inicio = exploracao_reconhecimento.data_inicio_contrato
+                AND contrato.governo = exploracao_reconhecimento.governo
+            ) OR (
+                contrato.titulo_contrato = pesq_cientifica.titulo_contrato
+                AND contrato.data_inicio = pesq_cientifica.data_inicio_contrato
+                AND contrato.governo = pesq_cientifica.governo
+            ) OR (
+                contrato.titulo_contrato = extracao_recurso.titulo_contrato
+                AND contrato.data_inicio = extracao_recurso.data_inicio_contrato
+                AND contrato.governo = extracao_recurso.governo
+            )
+        )
+    JOIN corporacao ON corporacao.codigo_corporativo = contrato.corporacao
+    GROUP BY missao.titulo_missao, missao.data_inicio
+    ORDER BY missao.data_inicio, missao.titulo_missao
+) AS subconsulta
+GROUP BY corporacao
+ORDER BY corporacao;
