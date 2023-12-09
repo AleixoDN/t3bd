@@ -2,8 +2,6 @@
  Para cada corporação, qual tipo de missão ela mais realizou?
 */
 
-SELECT DISTINCT missao.titulo_missao, missao.data_inicio FROM missao;
-
 SELECT
     corporacao AS Corporacao,
     COUNT(CASE WHEN tipo_construcao_estacao IS NOT NULL THEN 1 END) AS Qtd_Construcao_Estacao,
