@@ -151,33 +151,30 @@ HAVING COUNT(*) = (
 /* CONSULTA 3
 Os Recursos mais extraidos por um governo
 */
-SELECT SUM_R.GOVERNO, RECURSO, MAX(SUM_RECURSO) AS MAX_SUM_RECURSO
-FROM (   
-    SELECT ER.GOVERNO, E.RECURSO, SUM(E.QUANTIDADE) AS SUM_RECURSO
-    FROM EXTRACAO_RECURSO ER 
-    JOIN EXTRAI E
-    ON ER.TITULO_MISSAO = E.TITULO_MISSAO 
-    AND ER.DATA_INICIO = E.DATA_INICIO 
-    AND ER.TIPO_MISSAO = E.TIPO_MISSAO
-    GROUP BY ER.GOVERNO, E.RECURSO
-) AS SUM_R
-JOIN (
-    SELECT GOVERNO, MAX(SUM_RECURSO) AS MAX_SUM_RECURSO
-    FROM (
-        SELECT ER.GOVERNO, E.RECURSO, SUM(E.QUANTIDADE) AS SUM_RECURSO
-        FROM EXTRACAO_RECURSO ER 
-        JOIN EXTRAI E
-        ON ER.TITULO_MISSAO = E.TITULO_MISSAO 
-        AND ER.DATA_INICIO = E.DATA_INICIO 
-        AND ER.TIPO_MISSAO = E.TIPO_MISSAO
-        GROUP BY ER.GOVERNO, E.RECURSO
-    ) AS INNER_SUM_R
-    GROUP BY GOVERNO
-) AS MAX_R
-ON SUM_R.GOVERNO = MAX_R.GOVERNO AND SUM_R.SUM_RECURSO = MAX_R.MAX_SUM_RECURSO
-GROUP BY SUM_R.GOVERNO, SUM_R.RECURSO;
-
-
+SELECT
+    governo,
+    recurso,
+    total_extraido
+FROM
+    (SELECT
+        governo.nome AS governo,
+        recurso.nome AS recurso,
+        SUM(extrai.quantidade) AS total_extraido,
+        ROW_NUMBER() OVER (PARTITION BY governo.nome ORDER BY SUM(extrai.quantidade) DESC) as rank
+    FROM governo
+    JOIN contrato ON contrato.governo = governo.nome
+    JOIN extracao_recurso ON
+        extracao_recurso.governo = contrato.governo
+        AND extracao_recurso.titulo_contrato = contrato.titulo_contrato
+        AND extracao_recurso.data_inicio_contrato = contrato.data_inicio
+    JOIN extrai ON
+        extrai.titulo_missao = extracao_recurso.titulo_missao
+        AND extrai.data_inicio = extracao_recurso.data_inicio
+        AND extrai.tipo_missAO = extracao_recurso.tipo_missao
+    JOIN recurso ON recurso.nome = extrai.recurso
+    GROUP BY governo.nome, recurso.nome
+    ORDER BY governo.nome, SUM(extrai.quantidade) DESC) AS ranked
+WHERE rank = 1;
 
 /* CONSULTA 4
 Quais naves não estão participando de nenhuma missão num dado momento (ex: 01/01/2567)
@@ -294,3 +291,6 @@ ON MF.CORPO_PLANETARIO = MA.CORPO_PLANETARIO
 WHERE MA IS NULL
 GROUP BY MF.CORPO_PLANETARIO
 ORDER BY ULTIMA_VISITA;
+
+
+
