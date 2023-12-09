@@ -1,5 +1,6 @@
--- Para cada corporação, qual tipo de missão ela mais realizou?
-
+/* CONSULTA 1
+ Para cada corporação, qual tipo de missão ela mais realizou?
+*/
 
 SELECT DISTINCT missao.titulo_missao, missao.data_inicio FROM missao;
 
@@ -64,3 +65,88 @@ FROM (
 ) AS subconsulta
 GROUP BY corporacao
 ORDER BY corporacao;
+
+
+
+/* CONSULTA 2
+Código e Nome das Corporações que pegaram todos os contratos de um determinado governo
+Juntamente com o número de contratos 
+*/
+
+-- Consultas Específicas para cada governo
+
+SELECT CORP.CODIGO_CORPORATIVO, CORP.NOME
+FROM CORPORACAO CORP JOIN CONTRATO C
+ON CORP.codigo_corporativo = C.CORPORACAO
+WHERE C.GOVERNO = 'Fundação X'
+GROUP BY CORP.CODIGO_CORPORATIVO, CORP.NOME
+HAVING COUNT(*) = (
+    SELECT COUNT(*) 
+    FROM CONTRATO CONT
+    WHERE CONT.GOVERNO = 'Fundação X'
+);
+
+SELECT CORP.CODIGO_CORPORATIVO, CORP.NOME
+FROM CORPORACAO CORP JOIN CONTRATO C
+ON CORP.codigo_corporativo = C.CORPORACAO
+WHERE C.GOVERNO = 'República Federativa StarBet'
+GROUP BY CORP.CODIGO_CORPORATIVO, CORP.NOME
+HAVING COUNT(*) = (
+    SELECT COUNT(*) 
+    FROM CONTRATO CONT
+    WHERE CONT.GOVERNO = 'República Federativa StarBet'
+);
+
+
+SELECT CORP.CODIGO_CORPORATIVO, CORP.NOME
+FROM CORPORACAO CORP JOIN CONTRATO C
+ON CORP.codigo_corporativo = C.CORPORACAO
+WHERE C.GOVERNO = 'Unidade de Ursa Menor'
+GROUP BY CORP.CODIGO_CORPORATIVO, CORP.NOME
+HAVING COUNT(*) = (
+    SELECT COUNT(*) 
+    FROM CONTRATO CONT
+    WHERE CONT.GOVERNO = 'Unidade de Ursa Menor'
+);
+
+
+SELECT CORP.CODIGO_CORPORATIVO, CORP.NOME
+FROM CORPORACAO CORP JOIN CONTRATO C
+ON CORP.codigo_corporativo = C.CORPORACAO
+WHERE C.GOVERNO = 'Império de Neo Pompeia'
+GROUP BY CORP.CODIGO_CORPORATIVO, CORP.NOME
+HAVING COUNT(*) = (
+    SELECT COUNT(*) 
+    FROM CONTRATO CONT
+    WHERE CONT.GOVERNO = 'Império de Neo Pompeia'
+);
+
+/*
+Consulta final:  Mostra todas as corporações que realizaram todos as missões de um único Governo,
+qual governo em questão é, assim como seu número de contratos
+*/
+SELECT
+    CORP.CODIGO_CORPORATIVO,
+    CORP.NOME,
+    GOV.NOME AS NOME_GOVERNO,
+    COUNT(*) AS NUMERO_CONTRATOS
+
+FROM
+    CORPORACAO CORP
+JOIN
+    CONTRATO C ON CORP.codigo_corporativo = C.CORPORACAO
+JOIN
+    GOVERNO GOV ON C.GOVERNO = GOV.NOME
+GROUP BY
+    CORP.CODIGO_CORPORATIVO,
+    CORP.NOME,
+    GOV.NOME
+HAVING COUNT(*) = (
+    SELECT COUNT(*)
+    FROM CONTRATO CONT
+    WHERE CONT.GOVERNO = GOV.NOME
+);
+
+
+/* CONSULTA 3
+*/
