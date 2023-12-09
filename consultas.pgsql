@@ -147,8 +147,9 @@ HAVING COUNT(*) = (
 );
 
 
+
 /* CONSULTA 3
-Os Recursos mais extraidos de 
+Os Recursos mais extraidos por um governo
 */
 SELECT SUM_R.GOVERNO, RECURSO, MAX(SUM_RECURSO) AS MAX_SUM_RECURSO
 FROM (   
@@ -178,5 +179,39 @@ GROUP BY SUM_R.GOVERNO, SUM_R.RECURSO;
 
 
 
+/* CONSULTA 4
+Quais naves não estão participando de nenhuma missão num dado momento (ex: 01/01/2567)
+*/
 
-
+SELECT
+    *
+FROM
+    nave
+WHERE nave.nome_embarcacao NOT IN
+    (SELECT
+        nave.nome_embarcacao
+    FROM nave
+    JOIN participa ON participa.nave = nave.nome_embarcacao
+    JOIN missao ON
+        participa.titulo_missao = missao.titulo_missao
+        AND participa.data_inicio = missao.data_inicio
+        AND participa.tipo_missao = missao.tipo_missao
+    LEFT JOIN construcao_estacao ON
+        construcao_estacao.titulo_missao = missao.titulo_missao
+        AND construcao_estacao.data_inicio = missao.data_inicio
+        AND construcao_estacao.tipo_missao = missao.tipo_missao
+    LEFT JOIN exploracao_reconhecimento ON
+        exploracao_reconhecimento.titulo_missao = missao.titulo_missao
+        AND exploracao_reconhecimento.data_inicio = missao.data_inicio
+        AND exploracao_reconhecimento.tipo_missao = missao.tipo_missao
+    LEFT JOIN pesq_cientifica ON
+        pesq_cientifica.titulo_missao = missao.titulo_missao
+        AND pesq_cientifica.data_inicio = missao.data_inicio
+        AND pesq_cientifica.tipo_missao = missao.tipo_missao
+    LEFT JOIN extracao_recurso ON
+        extracao_recurso.titulo_missao = missao.titulo_missao
+        AND extracao_recurso.data_inicio = missao.data_inicio
+        AND extracao_recurso.tipo_missao = missao.tipo_missao
+    WHERE
+        COALESCE(construcao_estacao.data_limite, exploracao_reconhecimento.data_limite, pesq_cientifica.data_limite, extracao_recurso.data_limite) >= '2567-01-01'
+        AND missao.data_inicio <= '2567-01-01');
