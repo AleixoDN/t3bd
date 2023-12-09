@@ -218,7 +218,7 @@ WHERE nave.nome_embarcacao NOT IN
 Os Planetas (algum dia já visitados) que estão a mais tempo sem receber visita (missões)
 */
 
-SELECT MF.CORPO_PLANETARIO, MIN(MF.DATA_LIMITE) AS ULTIMA_VISITA
+SELECT MF.CORPO_PLANETARIO, MAX(MF.DATA_LIMITE) AS ULTIMA_VISITA
 FROM (
     SELECT 
     M.TITULO_MISSAO,
